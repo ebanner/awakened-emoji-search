@@ -1,13 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Style the title-bar class to be grey
+and horizontal across the top of the page */
+.title-bar {
+  background-color: #333;
+  color: white;
+  padding: 15px;
+  /* text-align: center; */
+  font-family: sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  /* There is padding in between the title bar and the
+   * side/top of the page if you don't set this to 0 */
+  margin: 0;
+}
+
+/* Put some padding between the title-bar
+and the page-body */
+.page-body {
+  padding-top: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  max-width: 200px; /* set a max-width for the container as a percentage */
+  margin: 0 auto; /* center the container horizontally */
+}
+
+/* TODO: Ask why we need this */
+.grid-container img {
+  width: 100%;
+  height: auto;
 }
