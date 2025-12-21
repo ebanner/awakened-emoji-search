@@ -1,0 +1,9 @@
+[project]
+name = "awakened-emoji-search"
+version = "0.1.0"
+description = "Semantic emoji search via Claude + MCP"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.25.0",
+]
