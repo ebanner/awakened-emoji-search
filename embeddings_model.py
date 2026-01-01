@@ -5,17 +5,23 @@ from IPython.display import display
 from PIL import Image
 from tqdm import tqdm
 
+from pathlib import Path
+
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+
 model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')
 model.eval()
 
 tokenizer = open_clip.get_tokenizer('ViT-B-32')
+
 
 def get_embedding(row):
     emoji_name, suffix = row["name"], row.suffix
     if suffix == 'gif':
         return torch.zeros([1, 512])
 
-    image_path = f'embeddings/emojis/{emoji_name}.{suffix}'
+    image_path = SCRIPT_DIR / 'embeddings' / 'emojis' / f'{emoji_name}.{suffix}'
     image = preprocess(Image.open(image_path)).unsqueeze(0)
     text = tokenizer([emoji_name])
 
@@ -34,7 +40,7 @@ def get_embedding(row):
 
 
 def get_embeddings():
-    df = pd.read_csv('embeddings/emojis/emojis.csv')
+    df = pd.read_csv(SCRIPT_DIR / 'embeddings' / 'emojis' / 'emojis.csv')
 
     embeddings = []
     for idx, row in tqdm(list(df.iterrows())):
@@ -67,13 +73,21 @@ def get_sorted_idxs(scores):
     return sorted_idxs
 
 
-if __name__ == '__main__':
+def get_emojis(query):
     embeddings = get_embeddings()
-    query_embedding = get_text_embedding('cat')
+    query_embedding = get_text_embedding(query)
     scores = get_scores(query_embedding, embeddings)
     sorted_idxs = get_sorted_idxs(scores)
 
-    df = pd.read_csv('embeddings/emojis/emojis.csv')
-    for _, (name, _, _) in df.iloc[sorted_idxs].head().iterrows():
-        print(name)
+    df = pd.read_csv(SCRIPT_DIR / 'embeddings' / 'emojis' / 'emojis.csv')
+
+    emoji_names = df["name"].iloc[sorted_idxs].head().tolist()
+
+    return emoji_names
+
+
+if __name__ == '__main__':
+    emojis = get_emojis('cat')
+    for emoji in emojis:
+        print(emoji)
 
