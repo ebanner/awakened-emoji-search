@@ -14,13 +14,13 @@ logging.basicConfig(
 
 log = logging.getLogger("emoji-mcp")
 
-mcp = FastMCP("Hello MCP Server")
+mcp = FastMCP("Awakened Emoji Search MCP Server")
 
 @mcp.tool()
-def hello(name: str = "World") -> str:
-    log.info("hello() called with name=%s", name)
+def awakened_emoji_search(emoji_name: str = "World") -> str:
+    log.info("awakened_emoji_search() called with emoji_name=%s", emoji_name)
 
-    emojis = get_emojis(name)
+    emojis = get_emojis(emoji_name)
 
     return str(emojis)
 
