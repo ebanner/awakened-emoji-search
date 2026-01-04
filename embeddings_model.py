@@ -40,6 +40,12 @@ def get_embedding(row):
 
 
 def get_embeddings():
+    try:
+        embeddings = torch.load('embeddings.pt')
+        return embeddings
+    except:
+        pass
+
     df = pd.read_csv(SCRIPT_DIR / 'embeddings' / 'emojis' / 'emojis.csv')
 
     embeddings = []
