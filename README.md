@@ -1,6 +1,6 @@
 # awakened-emoji-search
 
-<img width="2476" height="1802" alt="image-1" src="https://github.com/user-attachments/assets/0c9a697d-cccf-488f-938b-3b4dc13368c5" />
+<img width="1426" height="1708" alt="image" src="https://github.com/user-attachments/assets/cedec16b-4e01-4f6e-8b1d-895f42c06301" />
 
 ## Debugging
 
